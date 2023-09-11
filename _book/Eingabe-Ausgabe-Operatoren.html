@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Eingabe, Ausgabe und einfache Operatoren | Konzepte des Prozeduralen Programmierens</title>
+  <meta name="description" content="Skript zur Vorlesung “Konzepte des prozeduralen Programmierens” an der FOM in Leipzig." />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Eingabe, Ausgabe und einfache Operatoren | Konzepte des Prozeduralen Programmierens" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Skript zur Vorlesung “Konzepte des prozeduralen Programmierens” an der FOM in Leipzig." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Eingabe, Ausgabe und einfache Operatoren | Konzepte des Prozeduralen Programmierens" />
+  
+  <meta name="twitter:description" content="Skript zur Vorlesung “Konzepte des prozeduralen Programmierens” an der FOM in Leipzig." />
+  
+
+<meta name="author" content="Prof. Dr. Sascha Frohwerk" />
+
+
+<meta name="date" content="2023-09-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="einleitung.html"/>
+<link rel="next" href="kontrollstrukturen.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Vorwort</a></li>
+<li class="chapter" data-level="1" data-path="einleitung.html"><a href="einleitung.html"><i class="fa fa-check"></i><b>1</b> Einleitung</a></li>
+<li class="chapter" data-level="2" data-path="Eingabe-Ausgabe-Operatoren.html"><a href="Eingabe-Ausgabe-Operatoren.html"><i class="fa fa-check"></i><b>2</b> Eingabe, Ausgabe und einfache Operatoren</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="Eingabe-Ausgabe-Operatoren.html"><a href="Eingabe-Ausgabe-Operatoren.html#hallo-eva"><i class="fa fa-check"></i><b>2.1</b> Hallo EVA</a>
+<ul>
+<li class="chapter" data-level="" data-path="Eingabe-Ausgabe-Operatoren.html"><a href="Eingabe-Ausgabe-Operatoren.html#weitere-tips-zum-umgang-mit-code"><i class="fa fa-check"></i>Weitere Tips zum Umgang mit Code</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="Eingabe-Ausgabe-Operatoren.html"><a href="Eingabe-Ausgabe-Operatoren.html#einfache-datentypen"><i class="fa fa-check"></i><b>2.2</b> Einfache Datentypen</a>
+<ul>
+<li class="chapter" data-level="" data-path="Eingabe-Ausgabe-Operatoren.html"><a href="Eingabe-Ausgabe-Operatoren.html#datentypen-allgemein"><i class="fa fa-check"></i>Datentypen allgemein</a></li>
+<li class="chapter" data-level="" data-path="Eingabe-Ausgabe-Operatoren.html"><a href="Eingabe-Ausgabe-Operatoren.html#datentypen-in-python"><i class="fa fa-check"></i>Datentypen in Python</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="Eingabe-Ausgabe-Operatoren.html"><a href="Eingabe-Ausgabe-Operatoren.html#operatoren-zur-berechnung"><i class="fa fa-check"></i><b>2.3</b> Operatoren zur Berechnung</a></li>
+<li class="chapter" data-level="2.4" data-path="Eingabe-Ausgabe-Operatoren.html"><a href="Eingabe-Ausgabe-Operatoren.html#vergleichsoperatoren"><i class="fa fa-check"></i><b>2.4</b> Vergleichsoperatoren</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="kontrollstrukturen.html"><a href="kontrollstrukturen.html"><i class="fa fa-check"></i><b>3</b> Kontrollstrukturen</a></li>
+<li class="chapter" data-level="4" data-path="strukturierte-datentypen.html"><a href="strukturierte-datentypen.html"><i class="fa fa-check"></i><b>4</b> Strukturierte Datentypen</a></li>
+<li class="chapter" data-level="5" data-path="modularisierung.html"><a href="modularisierung.html"><i class="fa fa-check"></i><b>5</b> Modularisierung</a></li>
+<li class="chapter" data-level="6" data-path="weitere-themen.html"><a href="weitere-themen.html"><i class="fa fa-check"></i><b>6</b> Weitere Themen</a></li>
+<li class="chapter" data-level="7" data-path="beispiele-angewandter-programmierung.html"><a href="beispiele-angewandter-programmierung.html"><i class="fa fa-check"></i><b>7</b> Beispiele angewandter Programmierung</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Konzepte des Prozeduralen Programmierens</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="Eingabe-Ausgabe-Operatoren" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Eingabe, Ausgabe und einfache Operatoren<a href="Eingabe-Ausgabe-Operatoren.html#Eingabe-Ausgabe-Operatoren" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="hallo-eva" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Hallo EVA<a href="Eingabe-Ausgabe-Operatoren.html#hallo-eva" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Bei einfachen Programmen sollte man sich (wenn möglich) an das EVA-Prinzip halten. Das erhöht die Lesbarkeit und macht die weitere Bearbeitung des Programms einfacher.</p>
+<div class="figure">
+<img src="assets/eva.png" alt="" />
+<p class="caption">Das EVA-Prinzip</p>
+</div>
+<p>Der folgende Code zeigt ein einfaches Programm, das den Benutzer um die Eingabe einer ganzen Zahl bittet, diese mit zwei multipliziert und wieder ausgibt. Das Programm folgt dem EVA-Prinzip: Eingabe - Verarbeitung - Ausgabe. Dies hilft Code zu strukturieren und wir wollen versuchen, diesem Prinzip zu folgen, wenn es möglich ist.</p>
+<pre><code># Eingabe
+eingabe = input(&quot;Bitte eine Zahl eingeben:&quot;)
+
+# Verarbeitung
+zahl = int(eingabe)
+ausgabe = 2*zahl
+
+# Ausgabe
+print(ausgabe)</code></pre>
+<p>Anmerkungen dazu:</p>
+<ul>
+<li><p>Anweisungen werden von oben nach unten abgearbeitet</p></li>
+<li><p>“=” weist einer Variablen einen Wert zu</p></li>
+<li><p>In Python müssen diese Variablen vorher nicht definiert werden</p></li>
+<li><p>input() liest Werte ein</p></li>
+<li><p>print() gibt Werte aus</p></li>
+<li><p>int() wandelt einen String in einen Integer um</p></li>
+<li><p>Zeilen mit einer Raute am Anfang sind Kommentare. Sie werden nicht übersetzt.</p></li>
+</ul>
+<p>Die Namen von Variablen oder Funktionen nennen wir Bezeichner, hier z.B. “eingabe”. Diese dürfen in Python mit einem Buchstaben oder einen Unterstrich beginnen (letzteres ist aber nicht zu empfehlen), aber nicht mit einer Zahl oder einem Sonderzeichen. Sie dürfen ausserdem nicht den Namen eines Schlüsselwortes haben. Schlüsselworte sind Worte, die in Python eine besondere Bedeutung haben, z.B. dürfen Sie Ihre Variable nicht “while” nennen, weil damit eine Schleife eingeleitet wird.</p>
+<div id="weitere-tips-zum-umgang-mit-code" class="section level3 unnumbered hasAnchor">
+<h3>Weitere Tips zum Umgang mit Code<a href="Eingabe-Ausgabe-Operatoren.html#weitere-tips-zum-umgang-mit-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Anweisungen in einer Zeile zusammenfassen:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb2-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">3</span><span class="op">;</span> b <span class="op">=</span> <span class="dv">6</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="Eingabe-Ausgabe-Operatoren.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a<span class="op">+</span>b)</span></code></pre></div>
+<pre><code>## 9</code></pre>
+<p>Lange Zeilen umbrechen:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb4-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="op">\</span></span>
+<span id="cb4-2"><a href="Eingabe-Ausgabe-Operatoren.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span></span>
+<span id="cb4-3"><a href="Eingabe-Ausgabe-Operatoren.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span></code></pre></div>
+<pre><code>## 5</code></pre>
+<p>Ein- und Ausgabe von Zeichenketten (Strings):</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Dein Name:&quot;</span>)</span>
+<span id="cb6-2"><a href="Eingabe-Ausgabe-Operatoren.html#cb6-2" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="bu">input</span>()</span>
+<span id="cb6-3"><a href="Eingabe-Ausgabe-Operatoren.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Hallo &quot;</span><span class="op">+</span>name)</span></code></pre></div>
+<p>Seit Python 3.6 gibt eine weitere Möglichkeit Strings und andere Variablen zu verknüpfen: f-Strings</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb7-1" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="st">&quot;Klaus&quot;</span></span>
+<span id="cb7-2"><a href="Eingabe-Ausgabe-Operatoren.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Hallo </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>## Hallo Klaus</code></pre>
+</div>
+</div>
+<div id="einfache-datentypen" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Einfache Datentypen<a href="Eingabe-Ausgabe-Operatoren.html#einfache-datentypen" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Man unterscheidet zwischen einfachen und strukturierten Datentypen. Einfache Datentypen können eine einzige Information, zum Beispiel eine Zahl, speichern. Strukturierte Datentypen können mehrere Zusammenhänge Daten speichern. Hierbei kann es sich zum Beispiel um Listen oder Tabellen handeln. Die folgende Abbildung gibt einen Überblick über die in Python vorhandenen Datentypen.</p>
+<div id="datentypen-allgemein" class="section level3 unnumbered hasAnchor">
+<h3>Datentypen allgemein<a href="Eingabe-Ausgabe-Operatoren.html#datentypen-allgemein" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In allen Programmiersprachen und Datenbanksystemen gibt es Datentypen. Sie definieren, welche Art von Daten eine Variable oder eine Spalte in einer Tabelle aufnehmen kann. Allgemein gibt es folgende grundlegende Datentypen:</p>
+<table>
+<caption>Datentypen allgemein</caption>
+<thead>
+<tr class="header">
+<th align="left">Typ</th>
+<th align="left">Python</th>
+<th align="left">C</th>
+<th align="left">MySQL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">nichts</td>
+<td align="left">None</td>
+<td align="left">null, void</td>
+<td align="left">null</td>
+</tr>
+<tr class="even">
+<td align="left">ganze Zahlen</td>
+<td align="left">int</td>
+<td align="left">int</td>
+<td align="left">int</td>
+</tr>
+<tr class="odd">
+<td align="left">Fließkommazahlen</td>
+<td align="left">float</td>
+<td align="left">float, double</td>
+<td align="left">float</td>
+</tr>
+<tr class="even">
+<td align="left">komplexe Zahlen</td>
+<td align="left">complex</td>
+<td align="left">float complex</td>
+<td align="left">-</td>
+</tr>
+<tr class="odd">
+<td align="left">Buchstaben</td>
+<td align="left">bytearray</td>
+<td align="left">char</td>
+<td align="left">char</td>
+</tr>
+<tr class="even">
+<td align="left">Zeichenketten</td>
+<td align="left">string</td>
+<td align="left">-</td>
+<td align="left">varchar</td>
+</tr>
+<tr class="odd">
+<td align="left">Wahrheitswerte</td>
+<td align="left">bool</td>
+<td align="left">-</td>
+<td align="left">boolean</td>
+</tr>
+</tbody>
+</table>
+<p>In C gibt es nativ keinen Datentyp für Wahrheitswerte. Dies wird über die Integer-Werte 0 (falsch) und 1 (wahr) ausgedrückt. Seit C99 gibt es _Bool und bool. Es gibt von jedem Grundtyp noch mehrere Varianten in Abhängigkeit von der Größe (Länge) des Wertes und ob negative Werte erlaubt sind. Z.B: (in C)</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">long</span> <span class="bu">long</span> a<span class="op">;</span></span>
+<span id="cb9-2"><a href="Eingabe-Ausgabe-Operatoren.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">long</span> double b<span class="op">;</span></span>
+<span id="cb9-3"><a href="Eingabe-Ausgabe-Operatoren.html#cb9-3" aria-hidden="true" tabindex="-1"></a>unsigned <span class="bu">int</span> c<span class="op">;</span></span></code></pre></div>
+</div>
+<div id="datentypen-in-python" class="section level3 unnumbered hasAnchor">
+<h3>Datentypen in Python<a href="Eingabe-Ausgabe-Operatoren.html#datentypen-in-python" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Der Datentyp wird in Python dynamisch vom Interpreter festgelegt und nicht vom Entwickler. Dennoch haben alle Variablen natürlich einen Datentyp. Dieser kann mit der Funktion type() bestimmt werden:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb10-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb10-2"><a href="Eingabe-Ausgabe-Operatoren.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a))</span></code></pre></div>
+<pre><code>## &lt;class &#39;int&#39;&gt;</code></pre>
+<p>Wir sehen:</p>
+<ul>
+<li><p>Der Variablen wird automatisch der Typ zugewiesen, den der Anfangswert hat.</p></li>
+<li><p>In Python sind alles Objekte, auch normale Datentypen. In der Praxis merken wir davon meist wenig.</p></li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb12-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb12-2"><a href="Eingabe-Ausgabe-Operatoren.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a))</span></code></pre></div>
+<pre><code>## &lt;class &#39;int&#39;&gt;</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb14-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> a <span class="op">/</span> <span class="dv">3</span></span>
+<span id="cb14-2"><a href="Eingabe-Ausgabe-Operatoren.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span></code></pre></div>
+<pre><code>## 1.3333333333333333</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a))</span></code></pre></div>
+<pre><code>## &lt;class &#39;float&#39;&gt;</code></pre>
+<p>Wir sehen: Der Datentyp wird bei Bedarf dynamisch verändert.</p>
+<p>Die Menge verfügbarer Datentypen kann mit eingebundenen Bibliotheken erweitert werden.</p>
+</div>
+</div>
+<div id="operatoren-zur-berechnung" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Operatoren zur Berechnung<a href="Eingabe-Ausgabe-Operatoren.html#operatoren-zur-berechnung" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Die Operatoren zur Berechnung entsprechen im wesentlichen denen aus der Mathematik. Zusätzlich gibt es ganzzahliges Teilen (“//”) und Modulo (“%”). Potenzen werden mit “**” ausgedrückt, also nicht “^”, wie man es etwas aus Excel kennt.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb18-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb18-2"><a href="Eingabe-Ausgabe-Operatoren.html#cb18-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb18-3"><a href="Eingabe-Ausgabe-Operatoren.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a<span class="op">+</span>b)</span></code></pre></div>
+<pre><code>## 7</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a<span class="op">-</span>b)</span></code></pre></div>
+<pre><code>## 3</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a<span class="op">/</span>b)</span></code></pre></div>
+<pre><code>## 2.5</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a<span class="op">//</span>b)</span></code></pre></div>
+<pre><code>## 2</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a<span class="op">%</span>b)</span></code></pre></div>
+<pre><code>## 1</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a<span class="op">**</span>b)</span></code></pre></div>
+<pre><code>## 25</code></pre>
+<p>Für Zuweisungen und Operatoren gibt es eine verkürzte Schreibweise, z.B. a +=5 statt a = a + 5.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb30-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb30-2"><a href="Eingabe-Ausgabe-Operatoren.html#cb30-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb30-3"><a href="Eingabe-Ausgabe-Operatoren.html#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span></code></pre></div>
+<pre><code>## 6</code></pre>
+</div>
+<div id="vergleichsoperatoren" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Vergleichsoperatoren<a href="Eingabe-Ausgabe-Operatoren.html#vergleichsoperatoren" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Auch die Vergleichsoperatoren lehnen sich an die Mathematik an.</p>
+<table>
+<caption>Vergleichsoperatoren</caption>
+<thead>
+<tr class="header">
+<th>Syntax</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>==</td>
+<td>gleich</td>
+</tr>
+<tr class="even">
+<td>!=</td>
+<td>ungleich</td>
+</tr>
+<tr class="odd">
+<td>&lt;</td>
+<td>kleiner</td>
+</tr>
+<tr class="even">
+<td>&lt;=</td>
+<td>kleiner oder gleich</td>
+</tr>
+<tr class="odd">
+<td>&gt;</td>
+<td>größer</td>
+</tr>
+<tr class="even">
+<td>&gt;=</td>
+<td>größer oder gleich</td>
+</tr>
+</tbody>
+</table>
+<p>Beispiele:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb32-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb32-2"><a href="Eingabe-Ausgabe-Operatoren.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a <span class="op">&lt;</span> <span class="dv">20</span> <span class="kw">and</span> a <span class="op">&gt;</span> <span class="dv">7</span>)</span></code></pre></div>
+<pre><code>## True</code></pre>
+<p>oder auch</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb34-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">7</span> <span class="op">&lt;</span> <span class="dv">10</span> <span class="op">&lt;</span> <span class="dv">20</span></span>
+<span id="cb34-2"><a href="Eingabe-Ausgabe-Operatoren.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span></code></pre></div>
+<pre><code>## True</code></pre>
+<p>Die Zahl 0 wird als False gewertet.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="Eingabe-Ausgabe-Operatoren.html#cb36-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="bu">bool</span>(<span class="dv">5</span><span class="op">-</span><span class="dv">5</span>)</span>
+<span id="cb36-2"><a href="Eingabe-Ausgabe-Operatoren.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a)</span></code></pre></div>
+<pre><code>## False</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="einleitung.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="kontrollstrukturen.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-ein-ausgabe-opteratoren.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
